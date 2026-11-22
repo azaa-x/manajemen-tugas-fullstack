@@ -5,7 +5,7 @@ function TambahTugasPage({ daftarMatkul, onTambah }) {
   const navigate = useNavigate();
 
   async function simpan(dataBaru) {
-    await onTambah(dataBaru); // jika server menolak, error dilempar ke form
+    await onTambah(dataBaru);
     navigate("/tugas");
   }
 

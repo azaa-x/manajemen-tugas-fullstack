@@ -1,4 +1,4 @@
-// src/common/filters/http-exception.filter.ts
+
 import {
   ArgumentsHost,
   Catch,
@@ -23,8 +23,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    // Seragamkan bentuk "message": selalu string atau array string,
-    // sehingga frontend cukup membaca satu bentuk respons error.
     let message: string | string[] = 'Internal server error';
     let error = 'Internal Server Error';
 

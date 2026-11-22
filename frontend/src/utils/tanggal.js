@@ -20,8 +20,6 @@ export function formatTanggal(iso) {
   return `${tanggal} ${bulan} ${tahun}, ${jam}`;
 }
 
-// Mengubah nilai deadline dari server menjadi format <input type="datetime-local">
-// (yyyy-MM-ddTHH:mm). Jika berisi zona waktu (Z / +07:00), ubah ke waktu lokal.
 export function keInputDatetime(iso) {
   if (!iso) return "";
   const adaZona = /(Z|[+-]\d{2}:?\d{2})$/.test(iso);

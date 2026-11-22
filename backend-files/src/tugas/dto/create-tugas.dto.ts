@@ -1,4 +1,4 @@
-// src/tugas/dto/create-tugas.dto.ts
+
 import { Transform } from 'class-transformer';
 import {
   IsBoolean,
@@ -15,7 +15,6 @@ import {
 } from 'class-validator';
 import { DAFTAR_STATUS, type StatusTugas } from '../entities/tugas.entity';
 
-// Membuang spasi di awal/akhir agar "   " tidak lolos sebagai nama yang valid.
 const potongSpasi = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value;
 

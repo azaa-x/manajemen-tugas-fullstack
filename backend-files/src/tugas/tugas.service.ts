@@ -1,4 +1,4 @@
-// src/tugas/tugas.service.ts
+
 import {
   ConflictException,
   Injectable,
@@ -64,8 +64,7 @@ function buatDataAwal(): Tugas[] {
 
 @Injectable()
 export class TugasService {
-  // Penyimpanan sementara di memori (hilang saat server restart).
-  // Pada Modul 10 array ini diganti dengan PostgreSQL + Prisma.
+
   private tugas: Tugas[] = buatDataAwal();
 
   findAll(): Tugas[] {
@@ -75,7 +74,7 @@ export class TugasService {
   findOne(id: string): Tugas {
     const tugas = this.tugas.find((t) => t.id === id);
     if (!tugas) {
-      // Skenario error 1: data tidak ditemukan -> 404
+
       throw new NotFoundException(`Tugas dengan id ${id} tidak ditemukan`);
     }
     return tugas;
@@ -111,7 +110,6 @@ export class TugasService {
       id,
     );
 
-    // Abaikan nilai undefined/null, kecuali deskripsi yang memang boleh null.
     const perubahan = Object.fromEntries(
       Object.entries(dto).filter(
         ([kunci, nilai]) =>
@@ -128,7 +126,6 @@ export class TugasService {
     this.tugas = this.tugas.filter((t) => t.id !== tugas.id);
   }
 
-  // Skenario error 2: tugas dengan nama + mata kuliah yang sama -> 409
   private pastikanTidakDuplikat(
     nama: string,
     matkul: string,

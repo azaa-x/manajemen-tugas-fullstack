@@ -37,7 +37,6 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  // GET /tugas saat aplikasi dibuka (dan saat tombol "Coba Lagi" ditekan)
   useEffect(() => {
     let dibatalkan = false;
 
@@ -60,25 +59,21 @@ function App() {
     };
   }, [percobaan]);
 
-  // Kode dosen diambil dari mata kuliah yang dipilih.
   function siapkanPayload(data) {
     const mk = daftarMatkul.find((m) => m.nama === data.matkul);
     return { ...data, dosen: mk ? mk.dosen : "" };
   }
 
-  // POST /tugas. Error dilempar ke form agar pesan validasi server bisa ditampilkan.
   async function tambahTugas(dataBaru) {
     const tugasBaru = await tambahTugasKeServer(siapkanPayload(dataBaru));
     setDaftarTugas((sebelumnya) => [...sebelumnya, tugasBaru]);
   }
 
-  // PATCH /tugas/:id dari halaman Edit
   async function ubahTugas(id, dataBaru) {
     const hasil = await ubahTugasDiServer(id, siapkanPayload(dataBaru));
     setDaftarTugas((sebelumnya) => sebelumnya.map((t) => (t.id === id ? hasil : t)));
   }
 
-  // PATCH /tugas/:id hanya untuk status (dropdown pada kartu tugas)
   async function ubahStatus(id, status) {
     try {
       setGalatAksi([]);
@@ -89,7 +84,6 @@ function App() {
     }
   }
 
-  // DELETE /tugas/:id
   async function hapusTugas(id) {
     try {
       setGalatAksi([]);

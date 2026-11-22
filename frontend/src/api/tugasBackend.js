@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Alamat backend NestJS (lihat src/main.ts di folder backend: app.listen(3001)).
 export const API_URL = "http://localhost:3001";
 
 const api = axios.create({ baseURL: API_URL, timeout: 10000 });
@@ -21,11 +20,9 @@ export async function ubahTugasDiServer(id, data) {
 }
 
 export async function hapusTugasDiServer(id) {
-  await api.delete(`/tugas/${id}`); // server membalas 204 tanpa isi
+  await api.delete(`/tugas/${id}`);
 }
 
-// Mengubah error axios menjadi daftar pesan yang siap ditampilkan.
-// Backend selalu membalas { statusCode, error, message: string | string[] }.
 export function ambilPesanError(err) {
   if (err.response) {
     const pesan = err.response.data?.message;

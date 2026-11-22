@@ -12,7 +12,6 @@ const FORM_KOSONG = {
   pengingat: false,
 };
 
-// Mengubah data tugas dari server menjadi nilai awal form (mode edit).
 function dariTugas(tugas) {
   return {
     nama: tugas.nama,
@@ -25,8 +24,6 @@ function dariTugas(tugas) {
   };
 }
 
-// Dipakai untuk Tambah Tugas (nilaiAwal kosong) dan Edit Tugas (nilaiAwal diisi).
-// onSimpan harus async dan melempar error jika server menolak data.
 function FormTugas({ judul, keterangan, labelTombol, daftarMatkul, nilaiAwal, onSimpan }) {
   const [form, setForm] = useState(nilaiAwal ? dariTugas(nilaiAwal) : FORM_KOSONG);
   const [galat, setGalat] = useState({});
@@ -77,7 +74,7 @@ function FormTugas({ judul, keterangan, labelTombol, daftarMatkul, nilaiAwal, on
         pengingat: form.pengingat,
       });
     } catch (err) {
-      // Pesan dari server: validasi DTO (400), data duplikat (409), dll.
+
       setGalatServer(ambilPesanError(err));
     } finally {
       setMenyimpan(false);

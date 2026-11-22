@@ -1,4 +1,4 @@
-// src/tugas/tugas.controller.ts
+
 import {
   Body,
   Controller,
@@ -16,8 +16,7 @@ import { TugasService } from './tugas.service';
 
 @Controller('tugas')
 export class TugasController {
-  // Dependency Injection: NestJS menyuntikkan instance TugasService,
-  // controller tidak membuatnya sendiri dengan "new".
+
   constructor(private readonly tugasService: TugasService) {}
 
   @Get()

@@ -1,13 +1,11 @@
-# Pengujian API DeadlineIn dengan ekstensi "REST Client" (humao.rest-client) di VS Code.
-# Cara pakai: pastikan backend berjalan (npm run start:dev), lalu klik "Send Request"
-# di atas tiap request. Jalankan dari atas ke bawah.
 
 @baseUrl = http://localhost:3001
+@tugasId = {{buatTugas.response.body.$.id}}
 
-### 1. GET semua tugas (findAll)
+###
 GET {{baseUrl}}/tugas
 
-### 2. POST tambah tugas (create) -> 201 Created
+###
 # @name buatTugas
 POST {{baseUrl}}/tugas
 Content-Type: application/json
@@ -23,39 +21,36 @@ Content-Type: application/json
   "pengingat": true
 }
 
-### id tugas yang baru dibuat diambil otomatis dari respons request #2
 @tugasId = {{buatTugas.response.body.$.id}}
 
-### 3. GET satu tugas (findOne)
+###
 GET {{baseUrl}}/tugas/{{tugasId}}
 
-### 4. PATCH ubah sebagian data (update) -> hanya status
+###
 PATCH {{baseUrl}}/tugas/{{tugasId}}
 Content-Type: application/json
 
 { "status": "selesai" }
 
-### 5. PATCH ubah beberapa field sekaligus
+###
 PATCH {{baseUrl}}/tugas/{{tugasId}}
 Content-Type: application/json
 
 { "nama": "Laporan Praktikum Basis Data (Revisi)", "bobot": 25, "pengingat": false }
 
-### 6. DELETE hapus tugas (remove) -> 204 No Content
+###
 DELETE {{baseUrl}}/tugas/{{tugasId}}
 
-### ===================== SKENARIO ERROR =====================
-
-### 7. Error 404 NotFoundException: id tidak ada
+###
 GET {{baseUrl}}/tugas/tidak-ada
 
-### 8. Error 404: PATCH ke id yang sudah dihapus
+###
 PATCH {{baseUrl}}/tugas/{{tugasId}}
 Content-Type: application/json
 
 { "status": "belum" }
 
-### 9. Error 409 ConflictException: nama + mata kuliah sudah ada (data awal)
+###
 POST {{baseUrl}}/tugas
 Content-Type: application/json
 
@@ -65,7 +60,7 @@ Content-Type: application/json
   "deadline": "2026-10-20T10:00"
 }
 
-### 10. Error 400 validasi: nama terlalu pendek, deadline bukan tanggal, status/bobot salah
+###
 POST {{baseUrl}}/tugas
 Content-Type: application/json
 
@@ -77,7 +72,7 @@ Content-Type: application/json
   "bobot": 150
 }
 
-### 11. Error 400 validasi: properti asing ditolak (forbidNonWhitelisted)
+###
 POST {{baseUrl}}/tugas
 Content-Type: application/json
 
@@ -88,7 +83,7 @@ Content-Type: application/json
   "warna": "merah"
 }
 
-### 12. Error 400 validasi pada PATCH: status tidak valid
+###
 PATCH {{baseUrl}}/tugas/{{tugasId}}
 Content-Type: application/json
 
